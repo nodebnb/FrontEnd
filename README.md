@@ -1,9 +1,17 @@
 # FrontEnd 
 
+## mock up
 https://moqups.com/vanessachem@gmail.com/sjc3Ttgg
+click on left "pages" go to search page
 
-Frontend for nodebnb
-1. reactjs
-2. flux architecture provided by fluxible. 
-3. material-ui. 
+##Frontend for nodebnb
+- reactjs
+- flux architecture provided by fluxible. 
+- material-ui. 
 
+## set up
+```shellscript
+npm install
+npm run dev
+```
+[![solarized dualmode](https://github.com/nodebnb/FrontEnd/blob/master/nodebnb.gif)](#features)
