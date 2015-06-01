@@ -29,14 +29,14 @@ class Filter extends React.Component {
           muiTheme: ThemeManager.getCurrentTheme()
         };
     }
-
     render() {
         return (
              <div className="Filter">
+              <span> Checkin Date: </span>
+              <DatePicker hintText="Portrait Dialog" mode="landscape" className="filter-date"/>
               <span> Price: </span>
               <Slider name="slider1" />
-              <span> Checkin Date: </span>
-              <DatePicker hintText="Portrait Dialog" mode="landscape"/>
+
             </div>
         );
     } 
