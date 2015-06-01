@@ -27,7 +27,6 @@ class Nav extends React.Component {
           muiTheme: ThemeManager.getCurrentTheme()
         };
     }
-
     render() {
         const title = 'Node-bnb';
         // DO NOT DELETE
