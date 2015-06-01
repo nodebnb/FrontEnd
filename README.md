@@ -14,3 +14,4 @@ click on left "pages" go to search page
 npm install
 npm run dev
 ```
+[![solarized dualmode](https://github.com/nodebnb/FrontEnd/blob/master/nodebnb.gif)](#features)
