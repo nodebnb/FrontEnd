@@ -20,4 +20,6 @@ npm run dev
 - architecture(to be done)
 - http://fluxible.io/
 - http://material-ui.com/
+
+## demo
 [![solarized dualmode](https://github.com/nodebnb/FrontEnd/blob/master/nodebnb.gif)](#features)
