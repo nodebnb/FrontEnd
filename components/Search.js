@@ -66,24 +66,27 @@ class Search extends React.Component {
     }
 
     //TODO: find a more elegant way for generating the new url
+    //TODO: clean up
     _onKeyDown(event) {
         if (event.keyCode === ENTER_KEY_CODE) {
             event.preventDefault();
             event.stopPropagation();
             let key = 'q';
             let value = event.target.value;
-                //detect if current route is search or not
+            //detect if current route is search or not
             let newUrl = this.props.currentNavigate.url;
+            console.log(">< newUrl", newUrl)
             //if not on search page, redirect to search page
             if (newUrl.indexOf('search') < 0) {
-                newUrl = this.context.getStore(RouteStore).makePath('search');
-            }
-            const query = this.props.currentRoute.get('query').get(key);
+                newUrl = this.context.getStore(RouteStore).makePath('search') + '?';
+            } 
+            let query = this.props.currentRoute.get('query')?this.props.currentRoute.get('query').get(key): null;
             if (query) {
                 newUrl = UrlUtil.updateQuery(newUrl, key, value);
             } else {
                 newUrl = UrlUtil.addQuery(newUrl, key, value);
             }
+
 
             this.context.executeAction(navigateAction, {
                 method: 'GET',
