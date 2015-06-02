@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Filter updates Route.
+ * Filter updates Route by executing navigate action
  */
 import React from 'react';
 import { navigateAction, NavLink, handleRoute} from 'fluxible-router';
@@ -8,64 +8,70 @@ import connectToStores from 'fluxible/addons/connectToStores';
 // import SearchStore from '../stores/SearchStore';
 
 import cx from 'classnames';
-import Search from './Search.js';
+// import Search from './Search';
 import mui from 'material-ui';
 import _ from 'lodash';
+import UrlUtil from '../utils/UrlUtil';
 let ThemeManager = require('material-ui/lib/styles/theme-manager')();
-// let AppBar = mui.AppBar;
-// let TextField = mui.TextField;
-// let Toolbar = mui.Toolbar
-// let ToolbarGroup = mui.ToolbarGroup
-// let ToolbarSeparator = mui.ToolbarSeparator
-// let RaisedButton = mui.RaisedButton
-// let FontIcon = mui.FontIcon
-// let ToolbarTitle = mui.ToolbarTitle
-let Paper = mui.Paper
-let DatePicker = mui.DatePicker
-let Slider = mui.Slider
-// let FlatButton = mui.FlatButton
+let DatePicker = mui.DatePicker;
+let Slider = mui.Slider;
 
 //TODO:improve filter
 class Filter extends React.Component {
     constructor() {
         super();
         this.filter = {
-          maxPrice: 1000,
-          checkinDate: '06-01-2015'
-        }
-    }
-    // Important! for material UI
-    getChildContext() { 
-        return {
-          muiTheme: ThemeManager.getCurrentTheme()
+            maxPrice: 1000,
+            checkinDate: '06-01-2015'
         };
     }
+    // Important! for material UI
+    getChildContext() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    }
+    //as soon as a property changed, trigger a routing change
+    //this is only handling one query changes
+    _updateAndRoute(key) {
+        let newUrl = this.props.currentNavigate.url;
+        const query = this.props.currentRoute.get('query').get(key);
+                console.log(">< newUrl0", newUrl, UrlUtil)
 
-    _updateAndRoute(key){
-      const currentRoute = this.props.currentNavigate.url;
-      this.context.executeAction(navigateAction, {
-                method: 'GET',
-                url: currentRoute +"&maxPrice=1000"
-      });
+        if (query) {
+            newUrl = UrlUtil.updateQuery(newUrl, key, this.filter[key]);
+        } else {
+            newUrl = UrlUtil.addQuery(newUrl, key, this.filter[key]);
+        }
+        console.log(">< newUrl", newUrl)
 
-      //let newRoute = 
-      //looking for "&maxPrice=1000" or "&maxPrice=1000&"
-      //if there is none, append "&maxPrice=1000"
-      //else replace current maxPrice with the new value and execute route
+        //TODO: compare if query changed in searchstore before executeAction
+        this.context.executeAction(navigateAction, {
+            method: 'GET',
+            url: newUrl
+        });
+
+        //let newRoute =
+        //looking for "&maxPrice=1000" or "&maxPrice=1000&"
+        //if there is none, append "&maxPrice=1000"
+        //else replace current maxPrice with the new value and execute route
+    }
+    _onPriceRangeChanged(e, value) {
+        console.log(value);
+        this.filter.maxPrice = Math.floor(this.filter.maxPrice * value);
+        this._updateAndRoute('maxPrice');
+    }
+    _onDateChange(e){
+        console.log(">< date changed", e);
     }
 
-    _onPriceRangeChanged(e, value){
-       console.log(value)
-       this.maxPrice =  this.maxPrice * value;
-       this._updateAndRoute('maxPrice')
-    }
     render() {
         return (
              <div className="Filter">
               <span> Checkin Date: </span>
-              <DatePicker hintText="Portrait Dialog" mode="landscape" className="filter-date"/>
+              <DatePicker hintText="Portrait Dialog" mode="landscape" className="filter-date" onChange={this._onDateChange}/>
               <span> Price: </span>
-              <Slider name="slider1" defaultValue={0.5} onChange={_.debounce(this._onPriceRangeChanged.bind(this), 500)}/>
+              <Slider name="slider1" defaultValue={0.5} onChange={_.debounce(this._onPriceRangeChanged.bind(this), 200)}/>
 
             </div>
         );
@@ -78,7 +84,7 @@ Filter.childContextTypes = {
 
 
 Filter.contextTypes = {
-    executeAction: React.PropTypes.func,
+    executeAction: React.PropTypes.func
 };
 
 Filter.propTypes = {
