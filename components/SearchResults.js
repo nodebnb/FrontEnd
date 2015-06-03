@@ -5,9 +5,10 @@ import doSearch from '../actions/doSearch';
 import SearchStore from '../stores/SearchStore';
 import connectToStores from 'fluxible/addons/connectToStores';
 import { handleRoute } from 'fluxible-router';
+import mui from 'material-ui';
+let ThemeManager = require('material-ui/lib/styles/theme-manager')();
+let RaisedButton = mui.RaisedButton
 
-// import provideContext from 'fluxible/addons/provideContext';
-// 
 import Map from './Map';
 import Filter from './Filter';
 

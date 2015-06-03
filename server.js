@@ -13,6 +13,10 @@ import debugLib from 'debug';
 import React from 'react';
 import app from './app';
 import HtmlComponent from './components/Html';
+import SearchService from './services/search';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+
 const htmlComponent = React.createFactory(HtmlComponent);
 
 const debug = debugLib('flux1');
@@ -20,9 +24,24 @@ const debug = debugLib('flux1');
 const server = express();
 server.set('state namespace', 'App');
 server.use('/public', express.static(path.join(__dirname, '/build')));
+server.use(cookieParser());
+server.use(bodyParser.json());
+
+
+// Get access to the fetchr plugin instance
+const fetchrPlugin = app.getPlugin('FetchrPlugin');
+console.log(">< fetchrPlugin", fetchrPlugin)
+
+// Register our services
+fetchrPlugin.registerService(SearchService);
+
+// Set up the fetchr middleware
+server.use(fetchrPlugin.getXhrPath(), fetchrPlugin.getMiddleware());
 
 server.use((req, res, next) => {
-    let context = app.createContext();
+    let context = app.createContext({
+        req: req // The fetchr plugin depends on this
+    });
 
     debug('Executing navigate action');
     context.getActionContext().executeAction(navigateAction, {

@@ -36,8 +36,6 @@ class Filter extends React.Component {
     _updateAndRoute(key) {
         let newUrl = this.props.currentNavigate.url;
         const query = this.props.currentRoute.get('query').get(key);
-                console.log(">< newUrl0", newUrl, UrlUtil)
-
         if (query) {
             newUrl = UrlUtil.updateQuery(newUrl, key, this.filter[key]);
         } else {
