@@ -4,7 +4,30 @@ import qs from 'querystring';
 import url from 'url';
 import routes from '../configs/routes';
 
+
+let  resultsPool = [{
+                'id': '1',
+                'title': 'house1',
+                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
+                'location':'San Bruno'
+            }, {
+                'id': '2',
+                'title': 'house2',
+                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
+                'location':'San Bruno'
+            },
+            {
+                'id': '3',
+                'title': 'house3',
+                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
+                'location':'Palo Alto'
+            }
+
+            ];
+
 let fetchAPI = function(docParams, cb) {
+    // console.log(">< docParams", docParams)
+    // console.log(">< cb", cb)
     let url = "http://localhost:1337/"
 
     request
@@ -29,7 +52,8 @@ default {
         // if (cache[params.path]) {
         // return callback(null, cache[params.path]);
         // } else {
-        return fetchAPI(params.path);
+       // return fetchAPI(params, callback);
         // }
+        callback(null, resultsPool);
     }
 };

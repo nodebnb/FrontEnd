@@ -61,6 +61,12 @@ class SearchStore extends BaseStore {
         this.emitChange();
     }
 
+    _receiveSearch(results){
+        console.log(">< received results", results)
+         this.results = results;
+         this.emitChange();
+    }
+
 
     // _receiveresults(results) {
     //     this.photos = results;
@@ -112,7 +118,7 @@ class SearchStore extends BaseStore {
 SearchStore.storeName = 'SearchStore';
 
 SearchStore.handlers = {
-    // 'RECEIVE_INDEX': '_receiveIndex',
+    'RECEIVE_SEARCH_SUCCESS': '_receiveSearch',
     'DO_SEARCH': '_doSearch'
 };
 
