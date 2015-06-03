@@ -54,6 +54,8 @@ server.use((req, res, next) => {
     });
 });
 
+require('mongoose').connect('mongodb://127.0.0.1:27017/nodebnb')
+
 const port = process.env.PORT || 3000;
 server.listen(port);
 console.log('Listening on port ' + port);

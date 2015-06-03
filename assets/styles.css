@@ -7,7 +7,7 @@ body {
 	line-height: 20px;
 }
 
-.mainSearchBox { 
+.mainSearchBox {
   border-color: #cccccc;
   padding: 8px;
   font-size: 16px;
@@ -16,8 +16,8 @@ body {
   margin-top: 8px;
   width: 400px;
   margin-left: 100px;
-} 
-.mainSearchBox:focus { outline:none; } 
+}
+.mainSearchBox:focus { outline:none; }
 
 img.listingImg {
   width: 380px;
