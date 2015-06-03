@@ -37,34 +37,34 @@ class SearchStore extends BaseStore {
         this.query = null;
         // this.results = [];
         //
-        this.results = resultsPool
+        this.results = [];// resultsPool
     }
 
-    _doSearch(query) {
-          console.log('_doSearch:', query);
-        if (query === null){
-             this.results = resultsPool;
-             return  this.emitChange();
-        }
+    // _doSearch(query) {
+    //       console.log('_doSearch:', query);
+    //     if (query === null){
+    //          this.results = resultsPool;
+    //          return  this.emitChange();
+    //     }
 
-        // debug('Seaching');
-        this.query = query;
+    //     // debug('Seaching');
+    //     this.query = query;
 
-        // if ()
-        // if (this.index) {
-            // perform search, grab each doc and only return first 10
-            // this.results = this.index.search(query).map(result => this.docs[result.ref]).slice(0, 10);
-        this.results = _.union(_.filter(resultsPool, 'title', query), _.filter(resultsPool, 'location', query));
-        // /[{id: query.id, title: 'pp', img: 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg'}];
-        debug('Search complete');
-        // }
-        this.emitChange();
-    }
+    //     // if ()
+    //     // if (this.index) {
+    //         // perform search, grab each doc and only return first 10
+    //         // this.results = this.index.search(query).map(result => this.docs[result.ref]).slice(0, 10);
+    //     this.results = _.union(_.filter(resultsPool, 'title', query), _.filter(resultsPool, 'location', query));
+    //     // /[{id: query.id, title: 'pp', img: 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg'}];
+    //     debug('Search complete');
+    //     // }
+    //     this.emitChange();
+    // }
 
-    _receiveSearch(results, query){
-        console.log(">< received results", results)
-         this.results = results;
-         this.query = query;
+    _receiveSearch(data){
+        // console.log(">< received results", results)
+         this.results = data.results;
+         this.query = data.query;
          this.emitChange();
     }
 

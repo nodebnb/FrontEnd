@@ -27,19 +27,20 @@ class SearchResults extends React.Component {
     componentDidUpdate() {
         // console.log("><this.props.currentRoute", this.props)
         //this handles performing a search when deep linking to search page
-        // const query = this.props.currentRoute.get('query').get('q')
-        // console.log(">< query", query)
+        const query = this.props.currentRoute.get('query').get('q')
+        console.log(">< routequery", query)
         // // hancky here
-        // const storeQuery = this.context.getStore(SearchStore).getQuery();
-        // console.log(">< storeQuery", storeQuery)
-        // if (query && query !== storeQuery) {
-        //   this.context.executeAction(doSearch, query);
-        // }
+        const storeQuery = this.context.getStore(SearchStore).getQuery();
+        console.log(">< storeQuery", storeQuery)
+        if (query && query !== storeQuery) {
+          this.context.executeAction(doSearch, query);
+        }
     }
 
     showResults() {
         let html = (<p>No results found</p>)
         let searchResults = this.props.search.results;
+        console.log(">< searchResults", searchResults)
         const results = searchResults.map(result => {
             return (
                 <li className="listingOneContainer" key={result.id}>

@@ -30,18 +30,23 @@ let fetchAPI = function(docParams, callback) {
     // console.log(">< cb", cb)
     let url = "http://localhost:1337/"
 
-    // request
-    //     .get(url)
-    //     .end(function(err, res) {
-    //         if (err) {
-    //             return cb(err);
-    //         }
 
-    //         let md = res.body && res.body.content; // base64 encoded string of the markdown file
+    request
+        .get(url)
+        .end(function(err, res) {
+            if (err) {
+                   console.log("------------------------------------------")
+            console.log(">< error", err)
+                return callback(err);
+            }
+            console.log("------------------------------------------")
+            console.log(">< res", res)
 
-    //         return cb(null, res.body);
-    //     });
-    callback(null, resultsPool);
+            // let md = res.body; // base64 encoded string of the markdown file
+
+            return callback(null, res.body);
+        });
+    // callback(null, resultsPool);
 };
 
 

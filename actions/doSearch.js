@@ -3,6 +3,8 @@ const debug = Debug('doSearch');
 
 export default function doSearch(context, query, done) {
     debug(query);
+
+    console.log(">< do search")
     
     // Load from service
     // action execute search then notify store, store then notify view. 
@@ -16,9 +18,10 @@ export default function doSearch(context, query, done) {
             err404.statusCode = 404;
             return done(err404);
         }
-        console.log(">< data", data)
+        console.log(">< do search data", data)
+        console.log('do search query', query)
+        context.dispatch('RECEIVE_SEARCH_SUCCESS', {results: data, query: query});
 
-        context.dispatch('RECEIVE_SEARCH_SUCCESS', data, query);
         // context.dispatch('DO_SEARCH_STORE_QUERY', query);
         // context.dispatch('UPDATE_PAGE_TITLE', {
         //     pageTitle: pageTitle
