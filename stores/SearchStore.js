@@ -36,7 +36,7 @@ class SearchStore extends BaseStore {
         this.index = null;
         this.query = null;
         // this.results = [];
-        // 
+        //
         this.results = resultsPool
     }
 
@@ -49,7 +49,7 @@ class SearchStore extends BaseStore {
 
         // debug('Seaching');
         this.query = query;
-      
+
         // if ()
         // if (this.index) {
             // perform search, grab each doc and only return first 10
