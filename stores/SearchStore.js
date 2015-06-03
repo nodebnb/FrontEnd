@@ -61,9 +61,10 @@ class SearchStore extends BaseStore {
         this.emitChange();
     }
 
-    _receiveSearch(results){
+    _receiveSearch(results, query){
         console.log(">< received results", results)
          this.results = results;
+         this.query = query;
          this.emitChange();
     }
 

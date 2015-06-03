@@ -27,13 +27,14 @@ class SearchResults extends React.Component {
     componentDidUpdate() {
         // console.log("><this.props.currentRoute", this.props)
         //this handles performing a search when deep linking to search page
-        const query = this.props.currentRoute.get('query').get('q')
+        // const query = this.props.currentRoute.get('query').get('q')
         // console.log(">< query", query)
-        // hancky here
-        const storeQuery = this.context.getStore(SearchStore).getQuery();
-        if (query && query !== storeQuery) {
-          this.context.executeAction(doSearch, query);
-        }
+        // // hancky here
+        // const storeQuery = this.context.getStore(SearchStore).getQuery();
+        // console.log(">< storeQuery", storeQuery)
+        // if (query && query !== storeQuery) {
+        //   this.context.executeAction(doSearch, query);
+        // }
     }
 
     showResults() {

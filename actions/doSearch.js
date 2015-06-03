@@ -6,7 +6,7 @@ export default function doSearch(context, query, done) {
     
     // Load from service
     // action execute search then notify store, store then notify view. 
-    context.service.read('search', { name: 'niuniu'}, {}, function (err, data) {
+    context.service.read('search', query, {}, function (err, data) {
         if (err) {
             return done(err);
         }
@@ -18,7 +18,8 @@ export default function doSearch(context, query, done) {
         }
         console.log(">< data", data)
 
-        context.dispatch('RECEIVE_SEARCH_SUCCESS', data);
+        context.dispatch('RECEIVE_SEARCH_SUCCESS', data, query);
+        // context.dispatch('DO_SEARCH_STORE_QUERY', query);
         // context.dispatch('UPDATE_PAGE_TITLE', {
         //     pageTitle: pageTitle
         // });

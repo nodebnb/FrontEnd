@@ -25,22 +25,23 @@ let  resultsPool = [{
 
             ];
 
-let fetchAPI = function(docParams, cb) {
+let fetchAPI = function(docParams, callback) {
     // console.log(">< docParams", docParams)
     // console.log(">< cb", cb)
     let url = "http://localhost:1337/"
 
-    request
-        .get(url)
-        .end(function(err, res) {
-            if (err) {
-                return cb(err);
-            }
+    // request
+    //     .get(url)
+    //     .end(function(err, res) {
+    //         if (err) {
+    //             return cb(err);
+    //         }
 
-            let md = res.body && res.body.content; // base64 encoded string of the markdown file
+    //         let md = res.body && res.body.content; // base64 encoded string of the markdown file
 
-            return cb(null, res.body);
-        });
+    //         return cb(null, res.body);
+    //     });
+    callback(null, resultsPool);
 };
 
 
@@ -48,12 +49,13 @@ export
 default {
     name: 'search',
     read: function(req, resource, params, config, callback) {
+       // return fetchAPI(params, callback);
         // Return immediately if repo's readme is in cache
         // if (cache[params.path]) {
         // return callback(null, cache[params.path]);
         // } else {
        // return fetchAPI(params, callback);
         // }
-        callback(null, resultsPool);
+        return callback(null, resultsPool);
     }
 };
