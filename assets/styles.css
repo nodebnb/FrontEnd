@@ -63,3 +63,20 @@ a.mainTitle{
   width: 80%;
   margin: 20px;
 }
+
+.priceTag {
+  position: relative;
+  margin-top: -50px;
+  margin-bottom: 50px;
+  background-color: black;
+  width: 100px;
+  color: white;
+  font-size: 20px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  /* opacity: 0.6; */
+  opacity: 0.8;
+  /* z-index: 20; */
+  /* float: left; */
+}

@@ -44,14 +44,16 @@ class SearchResults extends React.Component {
         const results = searchResults.map(result => {
             return (
                 <li className="listingOneContainer" key={result.id}>
-                    <img className="listingImg" src={result._source.image}/>
+                    <div class="listingImageContainer">
+                       <img className="listingImg" src={result._source.image}/>
+                        <div className="priceTag">
+                           <span>$ </span>
+                           {result._source.price}
+                        </div>
+                    </div>
                     <h3>
                         {result._source.name}
                     </h3>
-                    <div>
-                       <span>Price: </span>
-                       {result._source.price}
-                    </div>
                     <div>
                        <span>Location: </span>
                        ({result._source.lat}, {result._source.lng})
