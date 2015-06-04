@@ -10,15 +10,17 @@ class GettingStarted extends React.Component {
 
   constructor (...args) {
     super(...args);
-    this.state = {
-      markers: [{
-        position: {
-          lat: 25.0112183,
-          lng: 121.52067570000001,
-        },
-        key: "Taiwan",
-      }],
-    };
+    console.log("><map")
+    console.log(this.props);
+    // this.state = {
+    //   markers: [{
+    //     position: {
+    //       lat: 25.0112183,
+    //       lng: 121.52067570000001,
+    //     },
+    //     key: "Taiwan",
+    //   }],
+    // };
   }
 
   /*
@@ -26,7 +28,7 @@ class GettingStarted extends React.Component {
    * Go and try click now.
    */
   _handle_map_click (event) {
-    return
+    return;
     // var {markers} = this.state;
     // markers = update(markers, {
     //   $push: [
@@ -67,6 +69,8 @@ class GettingStarted extends React.Component {
     const {props, state} = this,
           // {googleMapsApi, ...otherProps} = props;
           {googleMapsApi} = props;
+    console.log(">< in render")
+    console.log(">< props", this.props);
 
     return (
       <GoogleMaps containerProps={{
@@ -78,10 +82,10 @@ class GettingStarted extends React.Component {
         googleMapsApi={
           "undefined" !== typeof google ? google.maps : null
         }
-        zoom={3}
-        center={{lat: -25.363882, lng: 131.044922}}
+        zoom={12}
+        center={{ lat: 37.4130690866137,lng: -122.13531630593117}}
         onClick={this._handle_map_click.bind(this)}>
-        {state.markers.map(toMarker, this)}
+        {this.props.positions.map(toMarker, this)}
       </GoogleMaps>
     );
 
@@ -90,7 +94,7 @@ class GettingStarted extends React.Component {
         <Marker
           position={marker.position}
           key={marker.key}
-          onRightclick={this._handle_marker_rightclick.bind(this, index)} />
+        />
       );
     }
   }

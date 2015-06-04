@@ -5,6 +5,7 @@ import doSearch from '../actions/doSearch';
 import SearchStore from '../stores/SearchStore';
 import connectToStores from 'fluxible/addons/connectToStores';
 import { handleRoute } from 'fluxible-router';
+import _ from 'lodash';
 import mui from 'material-ui';
 let ThemeManager = require('material-ui/lib/styles/theme-manager')();
 let RaisedButton = mui.RaisedButton
@@ -40,7 +41,6 @@ class SearchResults extends React.Component {
     showResults() {
         let html = (<p>No results found</p>)
         let searchResults = this.props.search.results;
-        console.log(">< searchResults", searchResults)
         const results = searchResults.map(result => {
             return (
                 <li className="listingOneContainer" key={result.id}>
@@ -67,14 +67,60 @@ class SearchResults extends React.Component {
         return html;
     }
 
+    getPositions(){
+                let searchResults = this.props.search.results;
+                   if (!searchResults || searchResults.length == 0){
+            return {
+                positions: [],
+                center: { lat: 37.4130690866137,lng: -122.13531630593117}
+            }
+        }
+    
+        // console.log(">< searchResults", searchResults)
+        // //we need a object list like this
+        // //TODO: place the logic on server side probably
+        let totalLat = 0;
+        let totalLng = 0;
+        let positions = []
+        for (let i of searchResults){
+            let latI = i._source.lat;
+            let lngI
+            totalLat += i._source.lat;
+            totalLng += i._source.lng;
+            positions.push({
+                position:{
+                    lat: i._source.lat,
+                    lng: i._source.lng
+                }
+            })
+
+        }
+        // let positions = searchResults.map(i => {
+        //     return {position:{
+        //         lat: i._source.lat,
+        //         lng: i._source.lng
+        //     }}
+        // })
+        // console.log(">< positions", positions)
+        return {
+            positions:positions,
+        center: {
+            lat:totalLat/searchResults.length,
+            lng:totalLng/searchResults.length
+        }
+    }
+
+    }
+
     render() {
+        let markers = this.getPositions()
         return (
             <div id="main" role="main" class="SearchResultCmp">
                 <div className="SearchResult-Search"> 
                 <Filter/>
                 {this.showResults()}
                 </div>
-                <div className="SearchResult-Map"><Map/></div>
+                <div className="SearchResult-Map"><Map positions={markers.positions} center={markers.center}/></div>
             </div>
         );
     }
