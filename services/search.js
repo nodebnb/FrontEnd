@@ -5,25 +5,25 @@ import url from 'url';
 import routes from '../configs/routes';
 
 
-let  resultsPool = [{
-                'id': '1',
-                'title': 'house1',
-                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
-                'location':'San Bruno'
-            }, {
-                'id': '2',
-                'title': 'house2',
-                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
-                'location':'San Bruno'
-            },
-            {
-                'id': '3',
-                'title': 'house3',
-                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
-                'location':'Palo Alto'
-            }
+// let  resultsPool = [{
+//                 'id': '1',
+//                 'title': 'house1',
+//                 'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
+//                 'location':'San Bruno'
+//             }, {
+//                 'id': '2',
+//                 'title': 'house2',
+//                 'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
+//                 'location':'San Bruno'
+//             },
+//             {
+//                 'id': '3',
+//                 'title': 'house3',
+//                 'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
+//                 'location':'Palo Alto'
+//             }
 
-            ];
+//             ];
 
 let fetchAPI = function(docParams, callback) {
     // console.log(">< docParams", docParams)
@@ -35,18 +35,10 @@ let fetchAPI = function(docParams, callback) {
         .get(url)
         .end(function(err, res) {
             if (err) {
-                   console.log("------------------------------------------")
-            console.log(">< error", err)
                 return callback(err);
             }
-            console.log("------------------------------------------")
-            console.log(">< response from fetchAPI", res.body)
-
-            // let md = res.body; // base64 encoded string of the markdown file
-
             return callback(null, res.body);
         });
-    // callback(null, resultsPool);
 };
 
 
@@ -61,6 +53,6 @@ default {
         // } else {
        // return fetchAPI(params, callback);
         // }
-        return callback(null, resultsPool);
+        // return callback(null, resultsPool);
     }
 };

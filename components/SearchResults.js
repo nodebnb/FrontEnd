@@ -5,10 +5,11 @@ import doSearch from '../actions/doSearch';
 import SearchStore from '../stores/SearchStore';
 import connectToStores from 'fluxible/addons/connectToStores';
 import { handleRoute } from 'fluxible-router';
+import ListingDisplay from './SearchListingDisplay';
 import _ from 'lodash';
 import mui from 'material-ui';
 let ThemeManager = require('material-ui/lib/styles/theme-manager')();
-let RaisedButton = mui.RaisedButton
+let RaisedButton = mui.RaisedButton;
 
 import Map from './Map';
 import Filter from './Filter';
@@ -38,79 +39,43 @@ class SearchResults extends React.Component {
         }
     }
 
-    showResults() {
-        let html = (<p>No results found</p>)
+    getPositions() {
         let searchResults = this.props.search.results;
-        const results = searchResults.map(result => {
-            return (
-                <li className="listingOneContainer" key={result.id}>
-                    <div class="listingImageContainer">
-                       <img className="listingImg" src={result._source.image}/>
-                        <div className="priceTag">
-                           <span>$ </span>
-                           {result._source.price}
-                        </div>
-                    </div>
-                    <h3>
-                        {result._source.name}
-                    </h3>
-                    <div>
-                       <span>Location: </span>
-                       ({result._source.lat}, {result._source.lng})
-                    </div>
-                </li>
-            );
-        });
-
-        if (results.length) {
-            html = (<ul className="ListingContainer">{results}</ul>);
-        }
-
-        return html;
-    }
-
-    getPositions(){
-                let searchResults = this.props.search.results;
-                   if (!searchResults || searchResults.length == 0){
+        if (!searchResults || searchResults.length == 0) {
             return {
                 positions: [],
-                center: { lat: 37.4130690866137,lng: -122.13531630593117}
+                center: {
+                    lat: 37.4130690866137,
+                    lng: -122.13531630593117
+                }
             }
         }
-    
+
         // console.log(">< searchResults", searchResults)
         // //we need a object list like this
         // //TODO: place the logic on server side probably
         let totalLat = 0;
         let totalLng = 0;
-        let positions = []
-        for (let i of searchResults){
+        let positions = [];
+        for (let i of searchResults) {
             let latI = i._source.lat;
-            let lngI
-            totalLat += i._source.lat;
-            totalLng += i._source.lng;
+            let lngI = i._source.lng;
+            totalLat += latI;
+            totalLng += lngI;
             positions.push({
-                position:{
-                    lat: i._source.lat,
-                    lng: i._source.lng
+                position: {
+                    lat: latI,
+                    lng: lngI
                 }
-            })
-
+            });
         }
-        // let positions = searchResults.map(i => {
-        //     return {position:{
-        //         lat: i._source.lat,
-        //         lng: i._source.lng
-        //     }}
-        // })
-        // console.log(">< positions", positions)
         return {
-            positions:positions,
-        center: {
-            lat:totalLat/searchResults.length,
-            lng:totalLng/searchResults.length
-        }
-    }
+            positions: positions,
+            center: {
+                lat: totalLat / searchResults.length,
+                lng: totalLng / searchResults.length
+            }
+        };
 
     }
 
@@ -120,7 +85,7 @@ class SearchResults extends React.Component {
             <div id="main" role="main" class="SearchResultCmp">
                 <div className="SearchResult-Search"> 
                 <Filter/>
-                {this.showResults()}
+                <ListingDisplay results={this.props.search.results}/>
                 </div>
                 <div className="SearchResult-Map"><Map positions={markers.positions} center={markers.center}/></div>
             </div>

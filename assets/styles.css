@@ -22,6 +22,7 @@ body {
 img.listingImg {
   width: 380px;
   border-radius: 2px;
+  min-height: 200px;
 }
 
 ul.ListingContainer {

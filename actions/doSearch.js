@@ -18,8 +18,6 @@ export default function doSearch(context, query, done) {
             err404.statusCode = 404;
             return done(err404);
         }
-        console.log(">< do search data", data)
-        console.log('do search query', query)
         context.dispatch('RECEIVE_SEARCH_SUCCESS', {results: data, query: query});
 
         // context.dispatch('DO_SEARCH_STORE_QUERY', query);

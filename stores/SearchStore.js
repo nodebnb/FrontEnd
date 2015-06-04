@@ -9,25 +9,6 @@ This is a 'resource store', holding the results objects loaded by the app.
 results objects can come either loading a single photo (`LOAD_PHOTO_SUCCESS`)
 or after loading featured photos (`LOAD_FEATURED_PHOTOS_SUCCESS`).
 */
-const resultsPool = [{
-                'id': '1',
-                'title': 'house1',
-                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
-                'location':'San Bruno'
-            }, {
-                'id': '2',
-                'title': 'house2',
-                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
-                'location':'San Bruno'
-            },
-            {
-                'id': '3',
-                'title': 'house3',
-                'img': 'https://a0.muscache.com/ac/pictures/52804006/dc1adbb9_original.jpg',
-                'location':'Palo Alto'
-            }
-
-            ];
 class SearchStore extends BaseStore {
 
     constructor(dispatcher) {
