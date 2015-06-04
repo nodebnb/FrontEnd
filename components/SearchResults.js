@@ -34,8 +34,9 @@ class SearchResults extends React.Component {
         console.log(">< routequery", query)
         // // hancky here
         const storeQuery = this.context.getStore(SearchStore).getQuery();
+        const storeUrl = this.context.getStore(SearchStore).getUrl();
         console.log(">< storeQuery", storeQuery)
-        if (query && query !== storeQuery) {
+        if (url !== storeUrl) {
           let input = {url: url, query: query}
           this.context.executeAction(doSearch, input);
         }

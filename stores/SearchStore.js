@@ -62,6 +62,9 @@ class SearchStore extends BaseStore {
         return this.query;
     }
 
+    getUrl() {
+        return this.url;
+    }
 
     getState() {
         return {
