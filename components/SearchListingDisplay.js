@@ -5,7 +5,10 @@ var React = require('react'),
     RaisedButton = mui.RaisedButton,
     Paper = mui.Paper,
     Dialog = mui.Dialog,
-    FlatButton = mui.FlatButton;
+    FlatButton = mui.FlatButton,
+    TextField = mui.TextField,
+    FontIcon = mui.FontIcon;
+
 
 var ThemeManager = require('material-ui/lib/styles/theme-manager')();
 
@@ -47,7 +50,7 @@ var SomeAwesomeComponent = React.createClass({
                                <span>$ </span>
                                {result._source.price}
                         </Paper>
-                         <RaisedButton 
+                         <FlatButton 
                            className="Book" 
                            label="Book" 
                            primary={true}
@@ -62,14 +65,18 @@ var SomeAwesomeComponent = React.createClass({
                        <span>Location: </span>
                        ({result._source.lat}, {result._source.lng})
                     </div>
-                   
                        <Dialog
                           ref="standardDialog"
                           title="Book"
                           actions={standardActions}
                           actionFocus="submit"
                           modal={true}>
-                          Book this awesome listing {result._source.name}
+                           <h2>Book {result._source.name} </h2>
+                           <div>Price:{result._source.price}</div>
+                           <div>
+                           Your Email:
+                           <TextField hintText="Email Address" />
+                           </div>
                         </Dialog>
 
                 </li>
