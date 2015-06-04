@@ -15,6 +15,7 @@ import UrlUtil from '../utils/UrlUtil';
 let ThemeManager = require('material-ui/lib/styles/theme-manager')();
 let DatePicker = mui.DatePicker;
 let Slider = mui.Slider;
+import doSearch from '../actions/doSearch';
 
 //TODO:improve filter
 class Filter extends React.Component {

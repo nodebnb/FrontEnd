@@ -44,8 +44,10 @@ class SearchStore extends BaseStore {
 
     _receiveSearch(data){
         // console.log(">< received results", results)
-         this.results = data.results;
-         this.query = data.query;
+        this.url = data.url;
+        this.query = data.query;
+        this.results = data.results; 
+
          this.emitChange();
     }
 
@@ -65,6 +67,7 @@ class SearchStore extends BaseStore {
         return {
             // docs: this.docs,
             // index: this.index,
+            url: this.url,
             query: this.query,
             results: this.results
         };

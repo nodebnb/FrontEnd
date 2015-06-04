@@ -26,10 +26,11 @@ import routes from '../configs/routes';
 //             ];
 
 let fetchAPI = function(docParams, callback) {
-    // console.log(">< docParams", docParams)
-    // console.log(">< cb", cb)
-    let url = "http://localhost:8000/listings"
+    
+    let path = docParams
+    let url = "http://localhost:8000" + path
 
+    console.log(">< Fetching web services...", url)
 
     request
         .get(url)
@@ -46,7 +47,7 @@ export
 default {
     name: 'search',
     read: function(req, resource, params, config, callback) {
-       return fetchAPI(null, callback);
+       return fetchAPI(params.url, callback);
         // Return immediately if repo's readme is in cache
         // if (cache[params.path]) {
         // return callback(null, cache[params.path]);
