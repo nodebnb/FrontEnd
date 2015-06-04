@@ -30,10 +30,10 @@ var SomeAwesomeComponent = React.createClass({
     render: function() {
         let html = (<p>No results found</p>)
         let searchResults = this.props.results;
-      var standardActions = [
-      { text: 'Cancel' },
-      { text: 'Submit', onClick: this._onDialogSubmit, ref: 'submit' }
-    ];
+          var standardActions = [
+          { text: 'Cancel' },
+          { text: 'Submit', onClick: this._onDialogSubmit, ref: 'submit' }
+        ];
 
         const results = searchResults.map(result => {
             return (

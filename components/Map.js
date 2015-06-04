@@ -69,8 +69,6 @@ class GettingStarted extends React.Component {
     const {props, state} = this,
           // {googleMapsApi, ...otherProps} = props;
           {googleMapsApi} = props;
-    console.log(">< in render")
-    console.log(">< props", this.props);
 
     return (
       <GoogleMaps containerProps={{
