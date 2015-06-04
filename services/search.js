@@ -28,7 +28,7 @@ let  resultsPool = [{
 let fetchAPI = function(docParams, callback) {
     // console.log(">< docParams", docParams)
     // console.log(">< cb", cb)
-    let url = "http://localhost:1337/"
+    let url = "http://localhost:8000/listings"
 
 
     request
@@ -40,7 +40,7 @@ let fetchAPI = function(docParams, callback) {
                 return callback(err);
             }
             console.log("------------------------------------------")
-            console.log(">< res", res)
+            console.log(">< response from fetchAPI", res.body)
 
             // let md = res.body; // base64 encoded string of the markdown file
 
@@ -54,7 +54,7 @@ export
 default {
     name: 'search',
     read: function(req, resource, params, config, callback) {
-       // return fetchAPI(params, callback);
+       return fetchAPI(null, callback);
         // Return immediately if repo's readme is in cache
         // if (cache[params.path]) {
         // return callback(null, cache[params.path]);
