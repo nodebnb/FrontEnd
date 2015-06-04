@@ -20,7 +20,7 @@ body {
 .mainSearchBox:focus { outline:none; }
 
 img.listingImg {
-  width: 380px;
+  width: 400px;
   border-radius: 2px;
   min-height: 200px;
 }
